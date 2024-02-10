@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Recorder</title>
+</head>
+
+<body>
+    <h1>Audio Recorder</h1>
+    <button id="startRecord">Start Recording</button>
+    <button id="stopRecord" disabled>Stop Recording</button>
+    <button id="sendToBackend" disabled>Send to Backend</button>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let mediaRecorder;
+            let audioChunks = [];
+
+            const startRecordButton = document.getElementById('startRecord');
+            const stopRecordButton = document.getElementById('stopRecord');
+            const sendToBackendButton = document.getElementById('sendToBackend');
+
+            startRecordButton.addEventListener('click', startRecording);
+            stopRecordButton.addEventListener('click', stopRecording);
+            sendToBackendButton.addEventListener('click', sendToBackend);
+
+            async function startRecording() {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(stream);
+
+                mediaRecorder.ondataavailable = (event) => {
+                    if (event.data.size > 0) {
+                        audioChunks.push(event.data);
+                    }
+                };
+
+                mediaRecorder.onstop = () => {
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                    const audioUrl = URL.createObjectURL(audioBlob);
+
+                    // Enable buttons
+                    startRecordButton.disabled = false;
+                    stopRecordButton.disabled = true;
+                    sendToBackendButton.disabled = false;
+
+                    // Display audio player
+                    audioPlayer.src = audioUrl;
+                    audioPlayer.style.display = 'block';
+                };
+
+                // Disable buttons
+                startRecordButton.disabled = true;
+                stopRecordButton.disabled = false;
+                sendToBackendButton.disabled = true;
+
+                audioChunks = [];
+                mediaRecorder.start();
+            }
+
+            function stopRecording() {
+                mediaRecorder.stop();
+            }
+
+            async function sendToBackend() {
+                const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                const formData = new FormData();
+
+                formData.set('file', audioBlob, 'audioToSave.webm')
+
+                try {
+                    const response = await fetch('http://127.0.0.1:5000/audio/save', {
+                        method: 'POST',
+                        body: formData,
+                    });
+
+                    if (response.ok) {
+                        alert('Audio sent to backend successfully!');
+                    } else {
+                        alert('Failed to send audio to backend.');
+                    }
+                } catch (error) {
+                    console.error('Error sending audio to backend:', error);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
