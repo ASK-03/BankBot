@@ -16,7 +16,7 @@ def save_audio():
     try:
         audio_data = process_audio(request=request)
 
-        filename = os.path.join(audio_folder, "audio_file.mp3")
+        filename = os.path.join(audio_folder, "audio_file.wav")
         with open(filename, 'wb') as file:
             file.write(audio_data)
         
