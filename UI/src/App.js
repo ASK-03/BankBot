@@ -2,6 +2,8 @@ import React from "react";
 import "./App.css";
 import MicRecorder from "mic-recorder-to-mp3";
 import axios from "axios";
+import Lottie from "lottie-react";
+import animationData from "./assets/robot.json";
 
 const Mp3Recorder = new MicRecorder({ bitRate: 128 });
 
@@ -71,18 +73,38 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <button onClick={this.start} disabled={this.state.isRecording}>
-            Record
-          </button>
-          <button onClick={this.stop} disabled={!this.state.isRecording}>
-            Stop
-          </button>
-          <audio src={this.state.blobURL} controls="controls" />
-          {this.state.responseBlobURL && (
-            <audio src={this.state.responseBlobURL} controls="controls" />
-          )}
-        </header>
+        <div className="robot">
+          <h1>Welcome to Somu Bankbot!</h1>
+          <Lottie
+            animationData={animationData}
+            loop
+            autoplay
+            style={{ width: 600, height: 600 }}
+          />
+        </div>
+        <div className="App-header">
+          <div className="buttons">
+            <button onClick={this.start} disabled={this.state.isRecording}>
+              Speak
+            </button>
+            <button onClick={this.stop} disabled={!this.state.isRecording}>
+              Stop
+            </button>
+            <audio src={this.state.blobURL} controls="controls" />
+            {this.state.responseBlobURL && (
+              <audio src={this.state.responseBlobURL} controls="controls" />
+            )}
+          </div>
+
+          <div className="instructions">
+            <h2>How to interact with Somu?</h2>
+            <ul>
+              <li>Click on the Speak button to interact.</li>
+              <li>Once Done Click on the Stop button.</li>
+              <li>Wait for the response from the Server.</li>
+            </ul>
+          </div>
+        </div>
       </div>
     );
   }
