@@ -1,6 +1,6 @@
 import os
 from flask import Flask, request, send_file
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from middlewares.process_audio import process_audio
 from middlewares.speech_to_text import speech_to_text
 from middlewares.text_to_speech import text_to_speech
@@ -19,6 +19,7 @@ if not os.path.exists(audio_folder):
     os.makedirs(audio_folder)
 
 @app.route('/api/v1/chatbot', methods=['POST'])
+@cross_origin()
 def chatbot():
     try:
         audio_file_path = process_audio(request, audio_folder)
@@ -30,7 +31,9 @@ def chatbot():
         output_file_path = os.path.join(audio_folder, "text2speech", "text2speech.wav")
         text_to_speech(chatbot_response, output_file_path)
 
-        return send_file(output_file_path, as_attachment=True), 200
+        print(output_file_path)
+
+        return send_file(output_file_path, mimetype="audio/wav"), 200
     except Exception as e:
         return str(e), 500
 

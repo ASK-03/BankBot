@@ -39,10 +39,13 @@ class App extends React.Component {
         formData.append("audio", blob, "filename");
 
         axios
-          .post("http://127.0.0.1:5000/api/v1/chatbot", formData)
+          .post("http://127.0.0.1:5000/api/v1/chatbot", formData, {
+            responseType: "blob",
+          })
           .then((response) => {
-            console.log("Audio uploaded successfully:", response.data.message);
-            var responseBlobURL = URL.createObjectURL(response.data);
+            const blob = new Blob([response.data], { type: "audio/wav" });
+            console.log(response);
+            var responseBlobURL = URL.createObjectURL(blob);
             this.setState({ responseBlobURL: responseBlobURL });
           })
           .catch((error) => {
@@ -56,7 +59,6 @@ class App extends React.Component {
     navigator.getUserMedia(
       { audio: true },
       () => {
-        console.log("Permission Granted");
         this.setState({ isBlocked: false });
       },
       () => {
