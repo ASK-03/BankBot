@@ -1,19 +1,10 @@
-from vosk import Model, KaldiRecognizer, SetLogLevel
+from vosk import Model, KaldiRecognizer
 from tqdm.notebook import tqdm
 import wave
 import os
 import json
 
-def transcript_file(input_file, model_path):
-
-    # Check if file exists
-    if not os.path.isfile(input_file):
-        raise FileNotFoundError(os.path.basename(input_file) + " not found")
-
-    # Check if model path exists
-    if not os.path.exists(model_path):
-        raise FileNotFoundError(os.path.basename(model_path) + " not found")
-
+def speech_to_text(input_file, model_path):
     # open audio file
     wf = wave.open(input_file, "rb")
 
@@ -66,6 +57,6 @@ if __name__ == "__main__":
     #input_path_wav
     input_path_wav= os.path.join(directory,"audio_files","audio_file.wav")
     
-    hypothesis = transcript_file(input_path_wav, model_path)
+    hypothesis = speech_to_text(input_path_wav, model_path)
     print(hypothesis)
 

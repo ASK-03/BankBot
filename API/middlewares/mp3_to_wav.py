@@ -1,7 +1,7 @@
 from pydub import AudioSegment
 import os
 
-def mp3_to_wav(source, skip=0, excerpt=False):
+def mp3_to_wav(source, output_path, skip=0, excerpt=False):
 
     sound = AudioSegment.from_mp3(source) 
     sound =  sound.split_to_mono()[0] 
@@ -9,11 +9,9 @@ def mp3_to_wav(source, skip=0, excerpt=False):
 
     if excerpt:
         excrept = sound[skip*1000:skip*1000+30000] 
-        output_path = os.path.splitext(source)[0]+"_excerpt.wav"
         excrept.export(output_path, format="wav")
     else:
         audio = sound[skip*1000:]
-        output_path = os.path.splitext(source)[0]+".wav"
         audio.export(output_path, format="wav")
 
     return output_path

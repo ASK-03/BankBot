@@ -11,6 +11,7 @@ class App extends React.Component {
     this.state = {
       isRecording: false,
       blobURL: "",
+      responseBlobURL: "",
       isBlocked: false,
     };
   }
@@ -38,9 +39,11 @@ class App extends React.Component {
         formData.append("audio", blob, "filename");
 
         axios
-          .post("http://127.0.0.1:5000/audio/save", formData)
+          .post("http://127.0.0.1:5000/api/v1/chatbot", formData)
           .then((response) => {
-            console.log("Audio uploaded successfully:", response.data);
+            console.log("Audio uploaded successfully:", response.data.message);
+            var responseBlobURL = URL.createObjectURL(response.data);
+            this.setState({ responseBlobURL: responseBlobURL });
           })
           .catch((error) => {
             console.error("Error uploading audio:", error);
@@ -74,6 +77,9 @@ class App extends React.Component {
             Stop
           </button>
           <audio src={this.state.blobURL} controls="controls" />
+          {this.state.responseBlobURL && (
+            <audio src={this.state.responseBlobURL} controls="controls" />
+          )}
         </header>
       </div>
     );
