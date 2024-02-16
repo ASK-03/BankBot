@@ -4,6 +4,7 @@ from flask_cors import CORS, cross_origin
 from middlewares.process_audio import process_audio
 from middlewares.speech_to_text import speech_to_text
 from middlewares.text_to_speech import text_to_speech
+from middlewares.chatbot import get_context
 
 app = Flask(__name__)
 CORS(app)
@@ -25,13 +26,22 @@ def chatbot():
         audio_file_path = process_audio(request, audio_folder)
         transcript_text = speech_to_text(input_file=audio_file_path, model_path=model_path)
 
+        print("Transcript: ")
+        print(transcript_text)
+
         ## some api calls to chatbot
-        chatbot_response = "This is the output speech from chatbot"
+        context = get_context(transcript_text)
+        if context == 1:
+            chatbot_response = "User Details"
+        elif context == 2:
+            chatbot_response = "Account Details"
+        elif context == 3:
+            chatbot_response = "Transfer Money"
+        else:
+            chatbot_response = "Normal Chit-Chat"
         ##
         output_file_path = os.path.join(audio_folder, "text2speech", "text2speech.wav")
         text_to_speech(chatbot_response, output_file_path)
-
-        print(output_file_path)
 
         return send_file(output_file_path, mimetype="audio/wav"), 200
     except Exception as e:
