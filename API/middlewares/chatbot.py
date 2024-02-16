@@ -1,7 +1,8 @@
 import ollama
 
+
 def get_context(text):
-    prompt_template = '''
+    prompt_template = """
 Carefully analyze the user's query and choose the most relevant intent from the options below, assigning its corresponding number.
 Options:
     1. Get User Details
@@ -21,13 +22,14 @@ Ensure the response adheres to the specified pattern.
 Query: {}
 
 Response:
-    '''
-    response = ollama.chat(model='mistral', messages=[{
-        'role': 'user',
-        'content': prompt_template.format(text)
-    }])
+    """
+    response = ollama.chat(
+        model="mistral",
+        messages=[{"role": "user", "content": prompt_template.format(text)}],
+    )
 
-    return response['message']['content']
+    return response["message"]["content"]
+
 
 if __name__ == "__main__":
     print(get_context("Hey how are you"))

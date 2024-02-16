@@ -4,6 +4,7 @@ import wave
 import os
 import json
 
+
 def speech_to_text(input_file, model_path):
     # open audio file
     wf = wave.open(input_file, "rb")
@@ -26,7 +27,7 @@ def speech_to_text(input_file, model_path):
     transcription = []
 
     while True:
-        data = wf.readframes(4000) # use buffer of 4000
+        data = wf.readframes(4000)  # use buffer of 4000
         pbar.update(len(data))
         if len(data) == 0:
             pbar.set_description("Transcription finished")
@@ -41,22 +42,20 @@ def speech_to_text(input_file, model_path):
     final_result = json.loads(rec.FinalResult())
     transcription.append(final_result.get("text", ""))
 
-    transcription_text = ' '.join(transcription)
+    transcription_text = " ".join(transcription)
 
     return transcription_text
 
 
 if __name__ == "__main__":
-    
-    directory=os.path.dirname(__file__)
-    directory= "/".join(directory.split("/")[:-1])
-    
-    #model_path
-    model_path= os.path.join(directory,"vosk-model-small-en-in-0.4")
-    
-    #input_path_wav
-    input_path_wav= os.path.join(directory,"audio_files","audio_file.wav")
-    
+    directory = os.path.dirname(__file__)
+    directory = "/".join(directory.split("/")[:-1])
+
+    # model_path
+    model_path = os.path.join(directory, "vosk-model-small-en-in-0.4")
+
+    # input_path_wav
+    input_path_wav = os.path.join(directory, "audio_files", "audio_file.wav")
+
     hypothesis = speech_to_text(input_path_wav, model_path)
     print(hypothesis)
-
