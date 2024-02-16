@@ -5,7 +5,7 @@ def get_user_details(auth_code):
             "account_number": "1234567890",
             "mobile_number": "7428368001",
         },
-        "234": {
+        "two three four": {
             "username": "Sourabh Dadore",
             "account_number": "2345678901",
             "mobile_number": "7428368002",

@@ -51,13 +51,32 @@ def chatbot():
                 auth_code = args["auth_code"]
                 chatbot_response = get_user_details(auth_code)
             except Exception as e:
+                print(e)
                 chatbot_response = "Cannot extract auth code from the voice, try speaking clearly" 
         elif _context == 2:
-            chatbot_response = get_account_details()
+            try:
+                name = args["name"]
+                password = args["password"]
+                chatbot_response = get_account_details(name, password)
+            except Exception as e:
+                print(e)
+                chatbot_response = "Cannot fetch account details. Try speaking clearly"
         elif _context == 3:
-            chatbot_response = transfer_money()
+            try: 
+                sender = args["sender"]
+                reciever = args["reciever"]
+                amount = args["amount"]
+                password = args["password"]
+                chatbot_response = transfer_money(sender, reciever, amount, password)
+            except Exception as e:
+                print(e)
+                chatbot_response = "Cannot transfer money! Try speaking clearly."
         else:
-            chatbot_response = chit_chat()
+            try:
+                chatbot_response = chit_chat(transcript_text)
+            except Exception as e:
+                print(e)
+                chatbot_response = "Cannot reach the server now"
         ##
         try:
             output_file_path = os.path.join(audio_folder, "text2speech", "text2speech.wav")

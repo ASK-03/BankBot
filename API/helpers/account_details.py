@@ -1,28 +1,28 @@
-def get_account_details(auth_code):
+def get_account_details(name, password):
     user_details = {
-        "123": {
+        ("Jake", "one two three"): {
             "username": "Abhishek Singh Kushwaha",
             "account_number": "1234567890",
-            "mobile_number": "7428368001",
+            "balance": "10000000000"
         },
-        "234": {
+        ("Sourabh", "two three four"): {
             "username": "Sourabh Dadore",
             "account_number": "2345678901",
-            "mobile_number": "7428368002",
+            "balance": "1000000"
         },
     }
     try:
-        response_template = "The username of the requested user is {username}, account number is {account_number} and mobile number is {mobile_number}"
-        response = f"User with auth code: {auth_code} doesnot exist"
-        if user_details.get(auth_code, -1) != -1:
-            res = user_details[auth_code]
+        response_template = "The username of the requested user is {username}, account number is {account_number} and balance is {balance}"
+        response = f"User with name {name} and same password doesnot exist"
+        if user_details.get((name, password), -1) != -1:
+            res = user_details[(name, password)]
             username = res["username"]
             account_number = res["account_number"]
-            mobile_number = res["mobile_number"]
+            balance = res["balance"]
             response = response_template.format(
                 username=username,
                 account_number=account_number,
-                mobile_number=mobile_number,
+                balance=balance,
             )
     except Exception as e:
         print(e)
