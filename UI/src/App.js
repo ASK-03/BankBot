@@ -72,31 +72,50 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="robot">
-          <h1>Welcome to Somu Bankbot!</h1>
-          <Lottie
-            animationData={animationData}
-            loop
-            autoplay
-            style={{ width: 600, height: 600 }}
-          />
-        </div>
-        <div className="App-header">
-          <div className="buttons">
-            <button onClick={this.start} disabled={this.state.isRecording}>
-              Speak
-            </button>
-            <button onClick={this.stop} disabled={!this.state.isRecording}>
-              Stop
-            </button>
-            <audio src={this.state.blobURL} controls="controls" />
-            {this.state.responseBlobURL && (
-              <audio src={this.state.responseBlobURL} controls="controls" />
-            )}
+      <>
+        <div className="App">
+          <div className="robot">
+            <h1>Welcome to S.O.M.U Bankbot!</h1>
+            <Lottie
+              animationData={animationData}
+              loop
+              autoplay
+              style={{ width: 600, height: 600 }}
+            />
           </div>
-
-          <div className="instructions">
+          <div className="Getting-started">
+            <div>
+              <p>
+                Introducing SOMU, your friendly neighborhood banker-bot with a
+                twist! Ever felt like your rural banking experience needed a
+                little extra pizzazz 🍕? Well, say hello to SOMU – the Socially
+                Oriented Monetary Assistance Bankbot!
+              </p>
+              <p>
+                Imagine this: You're strolling through the lush greenery of your
+                village, pondering life's mysteries, when suddenly you remember
+                you need to transfer some funds. But wait, there's no need to
+                embark on a journey to the nearest bank, because SOMU is here to
+                save the day! With SOMU, banking becomes a breeze and a barrel
+                of laughs. Just strike up a conversation, spill the beans about
+                your account details (don't worry, SOMU's got top-notch
+                security🔐), toss in a pinch of authorization code, and voila!
+                Your money's on the move faster than you can say 💸"cash me if
+                you can."💸 So, whether you're chatting about crops, cows, or
+                even the occasional cosmic conundrum, SOMU is your trusty
+                sidekick, ready to make banking as easy as pie <span>🥧</span>
+                (and twice as fun)!
+              </p>
+            </div>
+            <div>
+              <button onClick={Scroll} className="scrolldown">
+                Getting Started
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="App-header" id="App-header">
+          <div className="instructions" id="inst">
             <h2>How to interact with Somu?</h2>
             <ul>
               <li>Click on the Speak button to interact.</li>
@@ -104,10 +123,54 @@ class App extends React.Component {
               <li>Wait for the response from the Server.</li>
             </ul>
           </div>
+
+          <div className="voicechat">
+            <div className="header">
+              Socially Oriented Monetary Assistance Bot
+            </div>
+            <div className="mainbody">
+              <div className="Me">
+                <span className="metxt">User</span>
+                <audio src={this.state.blobURL} controls="controls" />
+              </div>
+              <div className="Bot">
+                {this.state.responseBlobURL && (
+                  <>
+                    {" "}
+                    <span className="bottxt">Bot</span>
+                    <audio
+                      src={this.state.responseBlobURL}
+                      controls="controls"
+                    />
+                  </>
+                )}
+              </div>
+            </div>
+            <div className="footer">
+              <button
+                onClick={this.start}
+                disabled={this.state.isRecording}
+                className="start"
+              >
+                Speak
+              </button>
+              <button
+                onClick={this.stop}
+                disabled={!this.state.isRecording}
+                className="stop"
+              >
+                Stop
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 }
-
 export default App;
+
+function Scroll() {
+  var divElement = document.getElementById("App-header");
+  divElement.scrollIntoView({ behavior: "smooth" });
+}

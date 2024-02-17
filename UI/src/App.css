@@ -9,21 +9,104 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: auto;
+  height: 100%;
+}
+
+.Getting-started {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .App-header {
+  padding: 100px 50px 50px 50px;
   display: flex;
-  flex-direction: column;
   gap: 20px;
+  height: 950px;
 }
 
 .buttons {
   display: flex;
-  padding: 200px 100px 50px 100px;
+  padding: 20px 100px 50px 100px;
   flex-direction: column;
   gap: 20px;
 }
 
 .instructions {
-  padding: 0px 100px 100px 100px;
+  padding: 0px 100px 10px 100px;
+}
+
+.voicechat {
+  background-color: white;
+  width: 400px;
+  height: 450px;
+}
+
+.voicechat .header {
+  background-color: black;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.voicechat .mainbody {
+  background-color: white;
+  height: 370px;
+  background-image: url("./assets/bg.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.7;
+}
+.voicechat .footer {
+  background-color: black;
+  height: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.voicechat .Me {
+  padding: 40px 2px 2px 2px;
+  display: flex;
+  flex-direction: column;
+}
+
+.voicechat .Bot {
+  padding: 40px 0px 2px 95px;
+}
+
+.scrolldown {
+  width: 200px;
+  height: 100px;
+}
+
+.start {
+  background-color: rgb(111, 202, 111);
+  width: 150px;
+  height: 50px;
+}
+
+.stop {
+  background-color: rgb(207, 59, 59);
+  width: 150px;
+  height: 50px;
+}
+
+.metxt {
+  color: rgb(236, 86, 86);
+  font-style: italic;
+  font-size: smaller;
+  margin-left: 0px;
+  margin-bottom: 2px;
+}
+
+.bottxt {
+  color: rgb(236, 86, 86);
+  font-style: italic;
+  font-size: smaller;
+  margin-left: 280px;
 }
