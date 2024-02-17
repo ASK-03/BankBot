@@ -85,26 +85,20 @@ class App extends React.Component {
           </div>
           <div className="Getting-started">
             <div>
-              <p>
-                Introducing SOMU, your friendly neighborhood banker-bot with a
-                twist! Ever felt like your rural banking experience needed a
-                little extra pizzazz 🍕? Well, say hello to SOMU – the Socially
-                Oriented Monetary Assistance Bankbot!
+              <p className="p1">Introducing SOMU</p>
+              <p className="p2">
+                The ultimate rural banking sidekick! Need to transfer funds in
+                the countryside? Just chat with SOMU, share your account details
+                and authorization code, and watch your money zoom off to its
+                destination. Banking's never been more delightful – or
+                hilarious!
               </p>
-              <p>
+              <p className="p3">
                 Imagine this: You're strolling through the lush greenery of your
                 village, pondering life's mysteries, when suddenly you remember
                 you need to transfer some funds. But wait, there's no need to
                 embark on a journey to the nearest bank, because SOMU is here to
-                save the day! With SOMU, banking becomes a breeze and a barrel
-                of laughs. Just strike up a conversation, spill the beans about
-                your account details (don't worry, SOMU's got top-notch
-                security🔐), toss in a pinch of authorization code, and voila!
-                Your money's on the move faster than you can say 💸"cash me if
-                you can."💸 So, whether you're chatting about crops, cows, or
-                even the occasional cosmic conundrum, SOMU is your trusty
-                sidekick, ready to make banking as easy as pie <span>🥧</span>
-                (and twice as fun)!
+                save the day!
               </p>
             </div>
             <div>
@@ -117,7 +111,7 @@ class App extends React.Component {
         <div className="App-header" id="App-header">
           <div className="instructions" id="inst">
             <h2>How to interact with Somu?</h2>
-            <ul>
+            <ul className="listitems">
               <li>Click on the Speak button to interact.</li>
               <li>Once Done Click on the Stop button.</li>
               <li>Wait for the response from the Server.</li>

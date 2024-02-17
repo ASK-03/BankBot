@@ -22,9 +22,9 @@
 }
 
 .App-header {
-  padding: 100px 50px 50px 50px;
+  padding: 100px 50px 50px 150px;
   display: flex;
-  gap: 20px;
+  gap: 150px;
   height: 950px;
 }
 
@@ -37,16 +37,19 @@
 
 .instructions {
   padding: 0px 100px 10px 100px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .voicechat {
   background-color: white;
-  width: 400px;
-  height: 450px;
+  width: 800px;
+  height: 510px;
 }
 
 .voicechat .header {
-  background-color: black;
+  background-color: grey;
   height: 40px;
   display: flex;
   justify-content: center;
@@ -59,10 +62,10 @@
   background-image: url("./assets/bg.jpg");
   background-size: cover;
   background-position: center;
-  opacity: 0.7;
+  opacity: 0.9;
 }
 .voicechat .footer {
-  background-color: black;
+  background-color: grey;
   height: 100px;
   display: flex;
   justify-content: space-around;
@@ -76,12 +79,15 @@
 }
 
 .voicechat .Bot {
-  padding: 40px 0px 2px 95px;
+  padding: 40px 0px 2px 500px;
+  display: flex;
+  flex-direction: column;
 }
 
 .scrolldown {
   width: 200px;
-  height: 100px;
+  height: 50px;
+  border-radius: 2rem;
 }
 
 .start {
@@ -97,16 +103,41 @@
 }
 
 .metxt {
-  color: rgb(236, 86, 86);
+  color: rgb(234, 197, 62);
   font-style: italic;
-  font-size: smaller;
+  font-size: 20px;
   margin-left: 0px;
   margin-bottom: 2px;
 }
 
 .bottxt {
-  color: rgb(236, 86, 86);
+  color: rgb(234, 197, 62);
   font-style: italic;
-  font-size: smaller;
-  margin-left: 280px;
+  font-size: 20px;
+  margin-left: 270px;
+}
+
+.p1 {
+  font-size: 42px;
+  font-weight: 600;
+}
+
+.p2 {
+  font-size: 22px;
+}
+
+.p3 {
+  font-size: 15px;
+}
+
+.p4 {
+  font-size: 13px;
+}
+
+.listitems {
+  font-size: 25px;
+}
+
+h2 {
+  font-size: 30px;
 }
